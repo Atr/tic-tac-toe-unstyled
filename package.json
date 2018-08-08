@@ -1,0 +1,19 @@
+{
+  "name": "minesweeper",
+  "version": "1.0.0",
+  "description": "A clone of the popular game minesweeper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atrome/minesweeper.git"
+  },
+  "author": "Alex Romanak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atrome/minesweeper/issues"
+  },
+  "homepage": "https://github.com/atrome/minesweeper#readme"
+}
