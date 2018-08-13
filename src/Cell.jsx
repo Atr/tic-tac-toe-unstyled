@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Cell = props => (
-  <span>
-    x
-  </span>
+const Cell = ({ value }) => (
+  <button type='button' className='cell'>
+    {value}
+  </button>
 );
 
 export default Cell;
