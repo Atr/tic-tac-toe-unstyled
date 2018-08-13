@@ -1,3 +1,2 @@
-This is a starter react app, built from scratch.
-
-Helpful reference: https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658
+This is a basic, unstyled tic-tac-toe game app. 
+I am using it as a sandbox to play around with Redux. 
