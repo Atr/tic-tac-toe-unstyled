@@ -11,6 +11,7 @@ class App extends Component {
     super(props);
 
     this.renderCell = this.renderCell.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
       gameState: 'notStarted',
@@ -20,7 +21,19 @@ class App extends Component {
   }
 
   componentDidMount() {
-    
+    // if necessary
+  }
+
+  handleClick(x, y) {
+    this.setState((state) => {
+      let { gameBoard, nextPiece } = state;
+      gameBoard[x][y] = nextPiece;
+      nextPiece === 'X' ? nextPiece = 'O' : nextPiece = 'X';
+      return {
+        gameBoard,
+        nextPiece,
+      };
+    });
   }
 
   renderCell(x, y) {
@@ -28,28 +41,17 @@ class App extends Component {
     return (
       <Cell
         value={gameBoard[x][y]}
+        handleClick={() => this.handleClick(x, y)}
       />
     );
   }
 
-  // placePiece(cell) {
-  //   const { nextPiece } = this.state;
-
-  //   if (nextPiece === 'X') {
-  //     this.setState({
-  //       nextPiece: 'Y',
-  //     });
-  //   } else {
-  //     this.setState({
-  //       nextPiece: 'X',
-  //     });
-  //   }
-  // }
-
   render() {
     return (
       <div className='App'>
-        <Board renderCell={this.renderCell} />
+        <Board
+          renderCell={this.renderCell}
+        />
       </div>
     );
   }
