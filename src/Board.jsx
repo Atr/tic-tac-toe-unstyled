@@ -1,7 +1,10 @@
 import React from 'react';
 
-const Board = ({ renderCell }) => (
+const Board = ({ renderCell, nextPiece, resetGame }) => (
   <div>
+    <div>
+      The next piece is {nextPiece}
+    </div>
     <div className='row-1'>
       {renderCell(0, 0)}
       {renderCell(0, 1)}
@@ -16,6 +19,9 @@ const Board = ({ renderCell }) => (
       {renderCell(2, 0)}
       {renderCell(2, 1)}
       {renderCell(2, 2)}
+    </div>
+    <div onClick={resetGame}>
+      Reset The Game
     </div>
   </div>
 );

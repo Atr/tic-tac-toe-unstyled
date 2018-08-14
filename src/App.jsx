@@ -12,6 +12,7 @@ class App extends Component {
 
     this.renderCell = this.renderCell.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.resetGame = this.resetGame.bind(this);
 
     this.state = {
       gameState: 'notStarted',
@@ -25,14 +26,16 @@ class App extends Component {
   }
 
   handleClick(x, y) {
-    this.setState((state) => {
-      let { gameBoard, nextPiece } = state;
-      gameBoard[x][y] = nextPiece;
-      nextPiece === 'X' ? nextPiece = 'O' : nextPiece = 'X';
-      return {
-        gameBoard,
-        nextPiece,
-      };
+    this.setState((prevState) => {
+      let { gameBoard, nextPiece } = prevState;
+      if (!gameBoard[x][y]) {
+        gameBoard[x][y] = nextPiece;
+        nextPiece === 'X' ? nextPiece = 'O' : nextPiece = 'X';
+        return {
+          gameBoard,
+          nextPiece,
+        };
+      }
     });
   }
 
@@ -46,11 +49,21 @@ class App extends Component {
     );
   }
 
+  resetGame() {
+    this.setState({
+      gameState: 'notStarted',
+      gameBoard: helpers.returnEmptyBoard(),
+      nextPiece: 'X',
+    });
+  }
+
   render() {
     return (
       <div className='App'>
         <Board
+          nextPiece={this.state.nextPiece}
           renderCell={this.renderCell}
+          resetGame={this.resetGame}
         />
       </div>
     );
