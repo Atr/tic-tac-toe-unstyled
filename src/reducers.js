@@ -44,7 +44,7 @@ const switchPieces = (piece) => {
   return piece === 'X' ? 'O' : 'X';
 };
 
-const toggleGameState = (state) => { 
+const switchGameState = (state) => { 
   return state === 'notFinished' ? 'finished' : 'notFinished';
 };
 
@@ -77,7 +77,7 @@ const nextPiece = (state = 'X', action) => {
 const gameState = (state = 'notFinished', action) => {
   switch (action.type) {
     case 'TOGGLE_GAME_STATE': {
-      return toggleGameState(state);
+      return switchGameState(state);
     }
     default: return state;
   }
