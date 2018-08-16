@@ -21,6 +21,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
@@ -37,6 +38,8 @@
   "dependencies": {
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-hot-loader": "^4.3.4"
+    "react-hot-loader": "^4.3.4",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
   }
 }
