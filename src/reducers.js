@@ -89,22 +89,20 @@ const rootReducer = (state, action) => {
   switch (action.type) {
     case 'PLACE_PIECE': {
       return {
+        ...state,
         gameBoard: gameBoard(state.gameBoard, action, state.nextPiece),
         nextPiece: nextPiece(state.nextPiece, action),
-        gameState: gameState(state.gameState, action),
       };
     }
     case 'TOGGLE_PIECE': {
       return {
-        gameBoard: gameBoard(state.gameBoard, action),
+        ...state,
         nextPiece: nextPiece(state.nextPiece, action),
-        gameState: gameState(state.gameState, action),
       };
     }
     case 'TOGGLE_GAME_STATE': {
       return {
-        gameBoard: gameBoard(state.gameBoard, action),
-        nextPiece: nextPiece(state.nextPiece, action),
+        ...state,
         gameState: gameState(state.gameState, action),
       };
     }
@@ -124,8 +122,8 @@ const rootReducer = (state, action) => {
 
 // For reference and testing with test.html:
 
-// const store = Redux.createStore(rootReducer, {
-//   gameBoard: returnEmptyBoard(),
-//   nextPiece: 'X',
-//   gameState: 'notFinished',
-// });
+const store = Redux.createStore(rootReducer, {
+  gameBoard: returnEmptyBoard(),
+  nextPiece: 'X',
+  gameState: 'notFinished',
+});
