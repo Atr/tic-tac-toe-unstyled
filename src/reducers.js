@@ -120,10 +120,12 @@ const rootReducer = (state, action) => {
   }
 };
 
+export default rootReducer;
+
 // For reference and testing with test.html:
 
-const store = Redux.createStore(rootReducer, {
-  gameBoard: returnEmptyBoard(),
-  nextPiece: 'X',
-  gameState: 'notFinished',
-});
+// const store = Redux.createStore(rootReducer, {
+//   gameBoard: returnEmptyBoard(),
+//   nextPiece: 'X',
+//   gameState: 'notFinished',
+// });
