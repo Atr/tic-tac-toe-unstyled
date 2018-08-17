@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 
 import Board from './Board';
-import Cell from './Cell';
 
 import helpers from './helpers';
+
+import store from './store';
 
 class App extends Component {
   constructor(props) {
@@ -12,19 +13,26 @@ class App extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.resetGame = this.resetGame.bind(this);
-    this.endGame = this.endGame.bind(this);
-    this.placePiece = this.placePiece.bind(this);
-    this.handleClick = this.handleClick.bind(this);
 
-    this.state = {
-      gameState: 'notFinished',
-      gameBoard: helpers.returnEmptyBoard(),
-      nextPiece: 'X',
-    };
+    // this.state = {
+    //   gameState: 'notFinished',
+    //   gameBoard: helpers.returnEmptyBoard(),
+    //   nextPiece: 'X',
+    // };
+
+    // Fetch initial state
+    this.state = store.getState();
   }
 
   componentDidMount() {
-    // if necessary
+    // On mount, we want our component to subscribe to the store
+    // Ie, we want our App's state to reflect store's state every time store's state changes
+    // So we  add an event listener to be run every time store's state changes
+    // (I'll be refactoring this later but for now it works..)
+    this.unsubscribe = store.subscribe(() => {
+      this.setState(store.getState());
+    });
+    // Helpful reference: https://nickdrane.com/write-your-own-redux-connect/
   }
 
   componentDidUpdate() {
@@ -32,6 +40,12 @@ class App extends Component {
     if (gameState !== 'finished' && helpers.checkIfGameWinner(gameBoard)) {
       this.endGame();
     }
+  }
+
+  componentWillUnmount() {
+    // We don't have to worry about it in this particular case, but best practice is
+    // for a component to unsubscribe when it unmounts.
+    this.unsubscribe();
   }
 
   handleClick(x, y) {
