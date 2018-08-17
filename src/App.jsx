@@ -10,11 +10,11 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.renderCell = this.renderCell.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.resetGame = this.resetGame.bind(this);
     this.endGame = this.endGame.bind(this);
     this.placePiece = this.placePiece.bind(this);
+    this.handleClick = this.handleClick.bind(this);
 
     this.state = {
       gameState: 'notFinished',
@@ -63,16 +63,6 @@ class App extends Component {
     });
   }
 
-  renderCell(x, y) {
-    const { gameBoard } = this.state;
-    return (
-      <Cell
-        value={gameBoard[x][y]}
-        handleClick={() => this.handleClick(x, y)}
-      />
-    );
-  }
-
   resetGame() {
     this.setState({
       gameState: 'notFinished',
@@ -87,7 +77,8 @@ class App extends Component {
         <Board
           nextPiece={this.state.nextPiece}
           gameState={this.state.gameState}
-          renderCell={this.renderCell}
+          gameBoard={this.state.gameBoard}
+          handleClick={this.handleClick}
           resetGame={this.resetGame}
         />
       </div>

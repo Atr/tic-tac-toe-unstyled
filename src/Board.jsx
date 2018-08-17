@@ -1,10 +1,13 @@
 import React from 'react';
 
+import Cell from './Cell';
+
 const Board = ({
-  renderCell,
   nextPiece,
-  resetGame,
   gameState,
+  gameBoard,
+  handleClick,
+  resetGame,
 }) => {
   let gameStatus;
   if (gameState === 'notFinished') {
@@ -19,19 +22,19 @@ const Board = ({
         {gameStatus}
       </div>
       <div className='row-1'>
-        {renderCell(0, 0)}
-        {renderCell(0, 1)}
-        {renderCell(0, 2)}
+        <Cell value={gameBoard[0][0]} handleClick={handleClick} x={0} y={0} />
+        <Cell value={gameBoard[0][1]} handleClick={handleClick} x={0} y={1} />
+        <Cell value={gameBoard[0][2]} handleClick={handleClick} x={0} y={2} />
       </div>
       <div className='row-2'>
-        {renderCell(1, 0)}
-        {renderCell(1, 1)}
-        {renderCell(1, 2)}
+        <Cell value={gameBoard[1][0]} handleClick={handleClick} x={1} y={0} />
+        <Cell value={gameBoard[1][1]} handleClick={handleClick} x={1} y={1} />
+        <Cell value={gameBoard[1][2]} handleClick={handleClick} x={1} y={2} />
       </div>
       <div className='row-3'>
-        {renderCell(2, 0)}
-        {renderCell(2, 1)}
-        {renderCell(2, 2)}
+        <Cell value={gameBoard[2][0]} handleClick={handleClick} x={2} y={0} />
+        <Cell value={gameBoard[2][1]} handleClick={handleClick} x={2} y={1} />
+        <Cell value={gameBoard[2][2]} handleClick={handleClick} x={2} y={2} />
       </div>
       <button type='button' onClick={resetGame}>
         Reset The Game
