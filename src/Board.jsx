@@ -1,10 +1,13 @@
 import React from 'react';
 
+import Cell from './Cell';
+
 const Board = ({
-  renderCell,
   nextPiece,
-  resetGame,
   gameState,
+  gameBoard,
+  handleClick,
+  resetGame,
 }) => {
   let gameStatus;
   if (gameState === 'notFinished') {
@@ -18,21 +21,22 @@ const Board = ({
       <div>
         {gameStatus}
       </div>
-      <div className='row-1'>
-        {renderCell(0, 0)}
-        {renderCell(0, 1)}
-        {renderCell(0, 2)}
-      </div>
-      <div className='row-2'>
-        {renderCell(1, 0)}
-        {renderCell(1, 1)}
-        {renderCell(1, 2)}
-      </div>
-      <div className='row-3'>
-        {renderCell(2, 0)}
-        {renderCell(2, 1)}
-        {renderCell(2, 2)}
-      </div>
+      {gameBoard.map((gameRow, index) => {
+        return (
+          <div className={`row-${index}`}>
+            {gameRow.map((cell, index2) => {
+              return (
+                <Cell
+                  value={gameBoard[index][index2]}
+                  handleClick={handleClick}
+                  x={index}
+                  y={index2}
+                />
+              );
+            })}
+          </div>
+        );
+      })}
       <button type='button' onClick={resetGame}>
         Reset The Game
       </button>
