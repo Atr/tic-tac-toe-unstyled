@@ -40,11 +40,11 @@ const returnEmptyBoard = () => {
   return board;
 };
 
-const switchPieces = (piece) => { 
+const switchPieces = (piece) => {
   return piece === 'X' ? 'O' : 'X';
 };
 
-const switchGameState = (state) => { 
+const switchGameState = (state) => {
   return state === 'notFinished' ? 'finished' : 'notFinished';
 };
 
