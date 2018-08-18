@@ -1,3 +1,7 @@
+// Action creators vs. bound action creators, and their use cases:
+// https://redux.js.org/api/bindactioncreators
+// Bound action creators don't fit your use-case.  
+
 const placePiece = (x, y) => {
   return {
     type: 'PLACE_PIECE',

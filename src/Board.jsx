@@ -6,11 +6,13 @@ import store from './store';
 
 import { checkIfGameWinner } from './helpers';
 
-import { toggleGameState, resetGame } from './actions';
+import { toggleGameState, resetGame, placePiece } from './actions';
 
 class Board extends Component {
   constructor(props) {
     super(props);
+
+    this.handleClick = this.handleClick.bind(this);
 
     // Fetch initial state
     // Note that if this component didn't need everything in state, doing this would be less efficient
@@ -42,6 +44,15 @@ class Board extends Component {
     this.unsubscribe();
   }
 
+  handleClick(x, y) {
+    const { gameState, gameBoard } = this.state;
+    if (gameState !== 'finished') {
+      if (!gameBoard[x][y]) {
+        store.dispatch(placePiece(x, y));
+      }
+    }
+  }
+
   endGame() {
     store.dispatch(toggleGameState());
   }
@@ -71,6 +82,7 @@ class Board extends Component {
                 return (
                   <Cell
                     value={gameBoard[index][index2]}
+                    handleClick={this.handleClick}
                     x={index}
                     y={index2}
                   />
