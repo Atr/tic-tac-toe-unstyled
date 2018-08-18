@@ -4,21 +4,13 @@ import Cell from './Cell';
 
 import store from './store';
 
-import helpers from './helpers';
+import { checkIfGameWinner } from './helpers';
 
 import { toggleGameState, resetGame } from './actions';
 
 class Board extends Component {
   constructor(props) {
     super(props);
-
-    // this.handleClick = this.handleClick.bind(this);
-
-    // this.state = {
-    //   gameState: 'notFinished',
-    //   gameBoard: helpers.returnEmptyBoard(),
-    //   nextPiece: 'X',
-    // };
 
     // Fetch initial state
     // Note that if this component didn't need everything in state, doing this would be less efficient
@@ -39,7 +31,7 @@ class Board extends Component {
 
   componentDidUpdate() {
     const { gameBoard, gameState } = this.state;
-    if (gameState !== 'finished' && helpers.checkIfGameWinner(gameBoard)) {
+    if (gameState !== 'finished' && checkIfGameWinner(gameBoard)) {
       this.endGame();
     }
   }
@@ -50,46 +42,12 @@ class Board extends Component {
     this.unsubscribe();
   }
 
-  // TO DO NEXT: Declare this in Cell instead
-  // handleClick(x, y) {
-  //   const { gameState, gameBoard } = this.state;
-  //   if (gameState !== 'finished') {
-  //     if (!gameBoard[x][y]) {
-  //       this.placePiece(x, y);
-  //     }
-  //   }
-  // }
-
-  // TO DO NEXT: Declare this in Cell instead
-  // placePiece(x, y) {
-  //   this.setState((prevState) => {
-  //     let { gameBoard, nextPiece } = prevState;
-  //     gameBoard[x][y] = nextPiece;
-  //     nextPiece === 'X' ? nextPiece = 'O' : nextPiece = 'X';
-  //     return {
-  //       gameBoard,
-  //       nextPiece,
-  //     };
-  //   });
-  // }
-
   endGame() {
     store.dispatch(toggleGameState());
-
-    // this.setState((prevState) => {
-    //   let { gameState } = prevState;
-    //   gameState = 'finished';
-    //   return { gameState };
-    // });
   }
 
   resetGame() {
     store.dispatch(resetGame());
-    // this.setState({
-    //   gameState: 'notFinished',
-    //   gameBoard: helpers.returnEmptyBoard(),
-    //   nextPiece: 'X',
-    // });
   }
 
   render() {
@@ -130,45 +88,3 @@ class Board extends Component {
 }
 
 export default Board;
-
-// const Board = ({
-//   nextPiece,
-//   gameState,
-//   gameBoard,
-//   handleClick,
-//   resetGame,
-// }) => {
-//   let gameStatus;
-//   if (gameState === 'notFinished') {
-//     gameStatus = `The next piece is ${nextPiece}`;
-//   } else {
-//     gameStatus = 'Game over!  We have a winner.';
-//   }
-
-//   return (
-//     <div>
-//       <div>
-//         {gameStatus}
-//       </div>
-//       {gameBoard.map((gameRow, index) => {
-//         return (
-//           <div className={`row-${index}`}>
-//             {gameRow.map((cell, index2) => {
-//               return (
-//                 <Cell
-//                   value={gameBoard[index][index2]}
-//                   handleClick={handleClick}
-//                   x={index}
-//                   y={index2}
-//                 />
-//               );
-//             })}
-//           </div>
-//         );
-//       })}
-//       <button type='button' onClick={resetGame}>
-//         Reset The Game
-//       </button>
-//     </div>
-//   );
-// };
