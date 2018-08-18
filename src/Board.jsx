@@ -12,7 +12,7 @@ class Board extends Component {
   constructor(props) {
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
 
     // this.state = {
     //   gameState: 'notFinished',
@@ -21,6 +21,8 @@ class Board extends Component {
     // };
 
     // Fetch initial state
+    // Note that if this component didn't need everything in state, doing this would be less efficient
+    // than using the connect method.
     this.state = store.getState();
   }
 
@@ -49,27 +51,27 @@ class Board extends Component {
   }
 
   // TO DO NEXT: Declare this in Cell instead
-  handleClick(x, y) {
-    const { gameState, gameBoard } = this.state;
-    if (gameState !== 'finished') {
-      if (!gameBoard[x][y]) {
-        this.placePiece(x, y);
-      }
-    }
-  }
+  // handleClick(x, y) {
+  //   const { gameState, gameBoard } = this.state;
+  //   if (gameState !== 'finished') {
+  //     if (!gameBoard[x][y]) {
+  //       this.placePiece(x, y);
+  //     }
+  //   }
+  // }
 
   // TO DO NEXT: Declare this in Cell instead
-  placePiece(x, y) {
-    this.setState((prevState) => {
-      let { gameBoard, nextPiece } = prevState;
-      gameBoard[x][y] = nextPiece;
-      nextPiece === 'X' ? nextPiece = 'O' : nextPiece = 'X';
-      return {
-        gameBoard,
-        nextPiece,
-      };
-    });
-  }
+  // placePiece(x, y) {
+  //   this.setState((prevState) => {
+  //     let { gameBoard, nextPiece } = prevState;
+  //     gameBoard[x][y] = nextPiece;
+  //     nextPiece === 'X' ? nextPiece = 'O' : nextPiece = 'X';
+  //     return {
+  //       gameBoard,
+  //       nextPiece,
+  //     };
+  //   });
+  // }
 
   endGame() {
     store.dispatch(toggleGameState());
@@ -111,7 +113,6 @@ class Board extends Component {
                 return (
                   <Cell
                     value={gameBoard[index][index2]}
-                    handleClick={this.handleClick}
                     x={index}
                     y={index2}
                   />
